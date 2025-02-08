@@ -34,9 +34,10 @@ label {
     margin: 10px 0;
 }
 
-input[type="number"], input[type="range"], select {
+input, select, button {
     width: 100%;
     margin: 5px 0;
+    padding: 5px;
 }
 
 button {
@@ -44,11 +45,19 @@ button {
     border: none;
     color: white;
     padding: 8px 16px;
-    margin: 5px 0;
     cursor: pointer;
     border-radius: 3px;
 }
 
 button:hover {
     background-color: #45a049;
+}
+
+input[type="color"] {
+    height: 30px;
+    padding: 0;
+}
+
+input[type="range"] {
+    padding: 0;
 }
