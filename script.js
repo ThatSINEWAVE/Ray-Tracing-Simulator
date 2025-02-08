@@ -4,10 +4,10 @@ let width = canvas.width = window.innerWidth - 300;
 let height = canvas.height = window.innerHeight;
 
 let showRays = true;
-let rayCount = 100;
-let rayDensity = 50;
-let maxReflections = 5;
-let rayLength = 1500;
+let rayCount = 1000;
+let rayDensity = 100;
+let maxReflections = 1;
+let rayLength = 3000;
 let selectedElement = null;
 let offsetX = 0, offsetY = 0;
 
