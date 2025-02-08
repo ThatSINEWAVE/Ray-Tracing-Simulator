@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+canvas {
+    flex: 1;
+    background-color: #1a1a1a;
+}
+
+.controls {
+    width: 300px;
+    background-color: #333;
+    padding: 20px;
+    color: white;
+    overflow-y: auto;
+}
+
+.control-group {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+}
+
+input[type="number"], input[type="range"], select {
+    width: 100%;
+    margin: 5px 0;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
