@@ -1,8 +1,12 @@
+<div align="center">
+
 # Ray Tracing Simulator
 
 ![Ray-Tracing-Simulator](https://github.com/user-attachments/assets/966e9ae3-7142-4387-9586-4813881a08eb)
 
 An interactive **ray tracing simulation** built with JavaScript and HTML5 Canvas. This simulator allows users to visualize the behavior of light rays interacting with different objects, including reflective and absorptive surfaces.
+
+</div>
 
 ## 🌟 Features
 - **Real-time ray tracing** with adjustable parameters.
