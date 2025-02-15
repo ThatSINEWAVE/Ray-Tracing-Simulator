@@ -1,6 +1,6 @@
 <div align="center">
 
-# Ray Tracing Simulator
+# [Ray Tracing Simulator](https://thatsinewave.github.io/Ray-Tracing-Simulator/)
 
 ![Ray-Tracing-Simulator](https://github.com/user-attachments/assets/966e9ae3-7142-4387-9586-4813881a08eb)
 
