@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Ray Tracing Simulator</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <canvas id="canvas"></canvas>
-        <div class="controls">
-            <div class="control-group">
-                <h3>Ray Settings</h3>
-                <label>Rays: <input type="number" id="rayCount" value="100" min="1" max="500"></label>
-                <label>Show Rays: <input type="checkbox" id="showRays" checked></label>
-                <label>Ray Density: <input type="range" id="rayDensity" min="1" max="100" value="100"></label>
-                <label>Max Reflections: <input type="number" id="maxReflections" value="1" min="0" max="20"></label>
-                <label>Ray Length: <input type="number" id="rayLength" value="3000" min="100" max="5000"></label>
-            </div>
-            <div class="control-group">
-                <h3>Add Object</h3>
-                <select id="objectType">
-                    <option value="mirror">Mirror</option>
-                    <option value="circle">Circle</option>
-                </select>
-                <select id="objectMaterial">
-                    <option value="reflective">Reflective</option>
-                    <option value="absorptive">Absorptive</option>
-                </select>
-                <input type="color" id="objectColor" value="#ff0000">
-                <button id="addObject">Add Object</button>
-            </div>
-            <div class="control-group">
-                <h3>Sources</h3>
-                <button id="addSource">Add Light Source</button>
-                <button id="deleteElement">Delete Selected</button>
-            </div>
+      <canvas id="canvas"></canvas>
+      <div class="controls">
+        <div class="control-group">
+          <h3>Ray Settings</h3>
+          <label>Rays: <input type="number" id="rayCount" value="100" min="1" max="500">
+          </label>
+          <label>Show Rays: <input type="checkbox" id="showRays" checked>
+          </label>
+          <label>Ray Density: <input type="range" id="rayDensity" min="1" max="100" value="100">
+          </label>
+          <label>Max Reflections: <input type="number" id="maxReflections" value="1" min="0" max="20">
+          </label>
+          <label>Ray Length: <input type="number" id="rayLength" value="3000" min="100" max="5000">
+          </label>
         </div>
+        <div class="control-group">
+          <h3>Add Object</h3>
+          <select id="objectType">
+            <option value="mirror">Mirror</option>
+            <option value="circle">Circle</option>
+          </select>
+          <select id="objectMaterial">
+            <option value="reflective">Reflective</option>
+            <option value="absorptive">Absorptive</option>
+          </select>
+          <input type="color" id="objectColor" value="#ff0000">
+          <button id="addObject">Add Object</button>
+        </div>
+        <div class="control-group">
+          <h3>Sources</h3>
+          <button id="addSource">Add Light Source</button>
+          <button id="deleteElement">Delete Selected</button>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

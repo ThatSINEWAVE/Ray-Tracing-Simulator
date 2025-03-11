@@ -9,7 +9,8 @@ let rayDensity = 100;
 let maxReflections = 1;
 let rayLength = 3000;
 let selectedElement = null;
-let offsetX = 0, offsetY = 0;
+let offsetX = 0,
+    offsetY = 0;
 
 class LightSource {
     constructor(x, y) {
@@ -45,10 +46,10 @@ class ReflectiveObject {
 
         if (this.type === 'mirror') {
             ctx.fillStyle = this.color;
-            ctx.fillRect(-this.length/2, -this.width/2, this.length, this.width);
+            ctx.fillRect(-this.length / 2, -this.width / 2, this.length, this.width);
         } else if (this.type === 'circle') {
             ctx.beginPath();
-            ctx.arc(0, 0, this.length/2, 0, Math.PI * 2);
+            ctx.arc(0, 0, this.length / 2, 0, Math.PI * 2);
             ctx.fillStyle = this.color;
             ctx.fill();
         }
@@ -60,33 +61,36 @@ class ReflectiveObject {
         if (this.type === 'circle') {
             const dx = x - this.x;
             const dy = y - this.y;
-            return dx*dx + dy*dy <= (this.length/2)*(this.length/2);
+            return dx * dx + dy * dy <= (this.length / 2) * (this.length / 2);
         }
 
-        const rotatedX = Math.cos(-this.angle)*(x - this.x) - Math.sin(-this.angle)*(y - this.y);
-        const rotatedY = Math.sin(-this.angle)*(x - this.x) + Math.cos(-this.angle)*(y - this.y);
-        return Math.abs(rotatedX) <= this.length/2 && Math.abs(rotatedY) <= this.width/2;
+        const rotatedX = Math.cos(-this.angle) * (x - this.x) - Math.sin(-this.angle) * (y - this.y);
+        const rotatedY = Math.sin(-this.angle) * (x - this.x) + Math.cos(-this.angle) * (y - this.y);
+        return Math.abs(rotatedX) <= this.length / 2 && Math.abs(rotatedY) <= this.width / 2;
     }
 
     getNormalAt(x, y) {
         if (this.type === 'circle') {
             const dx = x - this.x;
             const dy = y - this.y;
-            const len = Math.sqrt(dx*dx + dy*dy);
-            return { x: dx/len, y: dy/len };
+            const len = Math.sqrt(dx * dx + dy * dy);
+            return {
+                x: dx / len,
+                y: dy / len
+            };
         }
 
         return {
-            x: Math.cos(this.angle + Math.PI/2),
-            y: Math.sin(this.angle + Math.PI/2)
+            x: Math.cos(this.angle + Math.PI / 2),
+            y: Math.sin(this.angle + Math.PI / 2)
         };
     }
 }
 
-let lightSources = [new LightSource(width/2, height/2)];
+let lightSources = [new LightSource(width / 2, height / 2)];
 let objects = [
-    new ReflectiveObject(width/2 + 200, height/2, 200, Math.PI/4, 'mirror', '#ffffff'),
-    new ReflectiveObject(width/2 - 200, height/2, 100, -Math.PI/4, 'circle', '#ff0000')
+    new ReflectiveObject(width / 2 + 200, height / 2, 200, Math.PI / 4, 'mirror', '#ffffff'),
+    new ReflectiveObject(width / 2 - 200, height / 2, 100, -Math.PI / 4, 'circle', '#ff0000')
 ];
 
 // Event Listeners
@@ -109,7 +113,7 @@ function addObject() {
     const color = document.getElementById('objectColor').value;
     const material = document.getElementById('objectMaterial').value;
     objects.push(new ReflectiveObject(
-        width/2, height/2,
+        width / 2, height / 2,
         type === 'circle' ? 50 : 200,
         Math.random() * Math.PI,
         type,
@@ -119,7 +123,7 @@ function addObject() {
 }
 
 function addSource() {
-    lightSources.push(new LightSource(width/2, height/2));
+    lightSources.push(new LightSource(width / 2, height / 2));
 }
 
 function deleteSelected() {
@@ -151,7 +155,7 @@ function startDrag(e) {
     for (let source of lightSources) {
         const dx = x - source.x;
         const dy = y - source.y;
-        if (dx*dx + dy*dy <= source.radius*source.radius) {
+        if (dx * dx + dy * dy <= source.radius * source.radius) {
             selectedElement = source;
             offsetX = x - source.x;
             offsetY = y - source.y;
@@ -184,7 +188,7 @@ function endDrag() {
 }
 
 function castRays(source) {
-    const angleStep = (Math.PI * 2) * (rayDensity/100) / rayCount;
+    const angleStep = (Math.PI * 2) * (rayDensity / 100) / rayCount;
     for (let i = 0; i < rayCount; i++) {
         const angle = i * angleStep;
         let ray = {
@@ -253,7 +257,7 @@ function circleIntersection(ray, circle) {
     const dy = ray.y - circle.y;
     const a = ray.dx * ray.dx + ray.dy * ray.dy;
     const b = 2 * (ray.dx * dx + ray.dy * dy);
-    const c = dx * dx + dy * dy - (circle.length/2) ** 2;
+    const c = dx * dx + dy * dy - (circle.length / 2) ** 2;
     const discriminant = b * b - 4 * a * c;
 
     if (discriminant < 0) return null;
@@ -262,18 +266,26 @@ function circleIntersection(ray, circle) {
     const t1 = (-b - sqrtDisc) / (2 * a);
     const t2 = (-b + sqrtDisc) / (2 * a);
 
-    if (t1 >= 0) return { x: ray.x + ray.dx * t1, y: ray.y + ray.dy * t1, t: t1 };
-    if (t2 >= 0) return { x: ray.x + ray.dx * t2, y: ray.y + ray.dy * t2, t: t2 };
+    if (t1 >= 0) return {
+        x: ray.x + ray.dx * t1,
+        y: ray.y + ray.dy * t1,
+        t: t1
+    };
+    if (t2 >= 0) return {
+        x: ray.x + ray.dx * t2,
+        y: ray.y + ray.dy * t2,
+        t: t2
+    };
     return null;
 }
 
 function lineIntersection(ray, mirror) {
     const cos = Math.cos(mirror.angle);
     const sin = Math.sin(mirror.angle);
-    const x1 = mirror.x - mirror.length/2 * cos;
-    const y1 = mirror.y - mirror.length/2 * sin;
-    const x2 = mirror.x + mirror.length/2 * cos;
-    const y2 = mirror.y + mirror.length/2 * sin;
+    const x1 = mirror.x - mirror.length / 2 * cos;
+    const y1 = mirror.y - mirror.length / 2 * sin;
+    const x2 = mirror.x + mirror.length / 2 * cos;
+    const y2 = mirror.y + mirror.length / 2 * sin;
 
     const x3 = ray.x;
     const y3 = ray.y;
@@ -321,7 +333,7 @@ function animate() {
             ctx.save();
             ctx.translate(selectedElement.x, selectedElement.y);
             ctx.rotate(selectedElement.angle);
-            ctx.strokeRect(-selectedElement.length/2 - 2, -selectedElement.width/2 - 2, selectedElement.length + 4, selectedElement.width + 4);
+            ctx.strokeRect(-selectedElement.length / 2 - 2, -selectedElement.width / 2 - 2, selectedElement.length + 4, selectedElement.width + 4);
             ctx.restore();
         }
     }
